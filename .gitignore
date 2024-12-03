@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django specific
+db.sqlite3
+/media/
+
+# Virtual environment
+.venv/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+
+# Migrations
+tasks/migrations/
+!tasks/migrations/__init__.py
+
+# Test cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+
+# Git-specific
+*.swp
+*.swo
+
+# Incomplete Documentation (not to be uploaded yet*)
+README.md
