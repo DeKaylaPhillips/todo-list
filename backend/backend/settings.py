@@ -81,6 +81,7 @@ DATABASES = {
         "NAME": "todo_list_db",
         "HOST": "localhost",
         "PORT": "5432",
+        "TEST": {"NAME": "test_todo_list_db"},
     }
 }
 
