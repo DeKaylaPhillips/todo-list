@@ -7,5 +7,5 @@ register_converter(converter=IntOrStrConverter, type_name="int_or_str")
 
 urlpatterns = [
     # https://127.000.000/api/v1/zendo/
-    path(route="", view=AllTasks.as_view(), name="all_tasks"),
+    path(route="tasks/", view=AllTasks.as_view(), name="all_tasks"),
 ]
