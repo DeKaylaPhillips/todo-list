@@ -15,7 +15,7 @@ class TestTaskModel(TestCase):
     def test_task_completed_value(self):
         """Tests that a task is NOT complete by default on creation."""
         self.assertFalse(self.task.completed)
-        
+
     def test_task_string_representation(self):
         """Tests the string representation of a task in a todo list."""
         self.assertEqual(str(self.task), "Test task.")
