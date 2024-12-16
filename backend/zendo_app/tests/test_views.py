@@ -5,9 +5,9 @@ from rest_framework.test import APITestCase
 from ..utilities.test_helpers import create_new_task
 
 
-class TestAllTasksView(APITestCase):
+class TestTasksView(APITestCase):
     def setUp(self):
-        self.url = reverse(viewname="all_tasks")
+        self.url = reverse(viewname="task_views")
 
     def test_get_all_tasks_returns_200_status_code(self):
         response = self.client.get(self.url)
