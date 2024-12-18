@@ -1,14 +1,11 @@
 from ..serializers import TaskSerializer
 
 
-def get_all_tasks(Task):
-    errors = {"no_tasks_found_error": "No tasks found in list."}
-    all_tasks = Task.objects.all().order_by("id")
-    if all_tasks.count() == 0:
-        data = errors["no_tasks_found_error"]
-        return data
-    data = TaskSerializer(all_tasks, many=True).data
-    return data
+def fetch_all_tasks(Task):
+    tasks = Task.objects.all().order_by("id")
+    if not tasks.exists():
+        return {"error": "No tasks found in list."}
+    return TaskSerializer(tasks, many=True).data
 
 
 def create_new_task(Task, request_data):
