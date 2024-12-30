@@ -4,7 +4,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED,
 from rest_framework.views import APIView
 
 from .models import Task
-from .utilities.test_helpers import create_new_task, fetch_all_tasks
+from .utilities.test_helpers import fetch_all_tasks, validate_and_create_a_task
 
 
 class TasksView(APIView):
@@ -12,13 +12,15 @@ class TasksView(APIView):
 
     def get(self, request):
         data = fetch_all_tasks(Task)
-        if "error" in data:
-            return Response(data=data["error"], status=HTTP_200_OK)
-        return Response(data=data, status=HTTP_200_OK)
+        return self._handle_response(data, HTTP_200_OK)
 
     def post(self, request):
-        data = create_new_task(Task, request.data)
+        data = validate_and_create_a_task(Task, request.data)
+        return self._handle_response(data, HTTP_201_CREATED)
+
+    def _handle_response(self, data, success_status):
         if "error" in data:
-            data = {"error": data["error"]}
-            return Response(data=data["error"], status=HTTP_400_BAD_REQUEST)
-        return Response(data=data, status=HTTP_201_CREATED)
+            if data.get("error") == "No tasks found in list.":
+                return Response(data["error"], HTTP_200_OK)
+            return Response(data["error"], HTTP_400_BAD_REQUEST)
+        return Response(data, success_status)

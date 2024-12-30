@@ -12,16 +12,21 @@ class TestTasksView(APITestCase):
         self.url = reverse(viewname="task_views")
 
     def test_get_returns_200_OK_status_code_when_tasks_retrieved(self):
+        Task.objects.create(title="Task 1", completed=True)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_returns_correct_field_data_when_called(self):
-        Task.objects.create(title="Task 1", completed=True)
+        Task.objects.create(title="Task 2", completed=True)
         response = self.client.get(self.url)
         self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["title"], "Task 1")
+        self.assertEqual(response.data[0]["title"], "Task 2")
         self.assertEqual(response.data[0]["completed"], True)
         self.assertEqual(response["Content-Type"], "application/json")
+
+    def test_post_returns_200_OK_status_code_when_no_tasks_found(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_returns_error_message_when_no_tasks_found(self):
         response = self.client.get(self.url)
