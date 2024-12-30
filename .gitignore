@@ -44,5 +44,5 @@ dist/
 *.swp
 *.swo
 
-# Incomplete Documentation (not to be uploaded yet*)
-README.md
+# Dev Notes
+notes.*
